@@ -4,15 +4,61 @@
 <head>
   <title>Web Sprint 2 Challenge</title>
   <script id="challenge">
-    // 👉 CHALLENGE 1
-    function profileActivation(profile, reason) {
-
+    // 👉 CHALLENGE 1 
+  function profileActivation(profile, reason) {
+    if (profile.active) {
+        if (reason === undefined) {
+            return "confirm status manually";
+        } else {
+            profile.active = false;
+            profile.reason = reason;
+            return profile;
+        }
+    } else {
+        profile.active = true;
+        delete profile.reason;
+        return profile;
     }
+}
+
+let testProfile1 = {
+    active: true,
+    reason: "Outdated profile"
+};
+
+let testProfile2 = {
+    active: false,
+    reason: "Expired subscription"
+};
+
+let testProfile3 = {
+    active: true
+};
+
+console.log(profileActivation(testProfile1, "Deactivated for security reasons"));
+console.log(profileActivation(testProfile2));
+console.log(profileActivation(testProfile3, "New activation"));
 
     // 👉 CHALLENGE 2
+    let result = []
     function mineSweeper(grid, x, y) {
-
+      function mineSweeper(grid, x, y) {
+    if (x < 0 || x >= grid.length || y < 0 || y >= grid.length) {
+        return "Invalid coordinates. Please provide coordinates within the grid bounds.";
     }
+    let square = grid[y][x];
+    if (square === "🟥") {
+        return "Boom! You hit a mine!";
+    } else if (square === "🟦") {
+        return "You landed on a safe spot.";
+    }
+}
+    return result
+    }
+
+ 
+
+    
 
     // 👉 CHALLENGE 3
     function booleanize(obj) {
