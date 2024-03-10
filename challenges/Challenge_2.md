@@ -1,9 +1,9 @@
 # Challenge 2: MineSweeper Game
 
 ### Objective
-Develop the `mineSweeper` function that evaluates a player's move in a grid-based minefield game. The function should analyze the grid position based on provided coordinates and determine if the player has landed on a safe spot or a mine.
+ the `mineSweeper` function that evaluates a player's move in a grid-based minefield game. The function should analyze the grid position based on provided coordinates and determine if the player has landed on a safe spot or a mine.
 
-### Function
+### FunctioDevelopn
 ```javascript
 function mineSweeper(grid, x, y)
 ```

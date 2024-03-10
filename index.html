@@ -4,81 +4,132 @@
 <head>
   <title>Web Sprint 2 Challenge</title>
   <script id="challenge">
+
+    
     // 👉 CHALLENGE 1 
-  function profileActivation(profile, reason) {
+    function profileActivation(profile, reason) {
     if (profile.active) {
-        if (reason === undefined) {
+        if (!reason) {
             return "confirm status manually";
         } else {
             profile.active = false;
             profile.reason = reason;
-            return profile;
         }
     } else {
         profile.active = true;
         delete profile.reason;
-        return profile;
     }
+    return profile;
 }
-
 let testProfile1 = {
-    active: true,
-    reason: "Outdated profile"
-};
-
-let testProfile2 = {
     active: false,
-    reason: "Expired subscription"
+    reason: "Not logged in for 30 days"
 };
 
-let testProfile3 = {
-    active: true
-};
+let result = profileActivation(testProfile1, "Inactive for too long");
 
-console.log(profileActivation(testProfile1, "Deactivated for security reasons"));
-console.log(profileActivation(testProfile2));
-console.log(profileActivation(testProfile3, "New activation"));
+console.log(result);
+
 
     // 👉 CHALLENGE 2
-    let result = []
     function mineSweeper(grid, x, y) {
-      function mineSweeper(grid, x, y) {
-    if (x < 0 || x >= grid.length || y < 0 || y >= grid.length) {
-        return "Invalid coordinates. Please provide coordinates within the grid bounds.";
+    if (x < 1 || x > 3 || y < 1 || y > 3) {
+        return "invalid coordinates";
     }
-    let square = grid[y][x];
+    const square = grid[y-1][x-1];
     if (square === "🟥") {
-        return "Boom! You hit a mine!";
+        return "🟥 💀"; 
     } else if (square === "🟦") {
-        return "You landed on a safe spot.";
+        return "🟦 🥳"; 
     }
-}
-    return result
-    }
+}  
 
- 
 
-    
-
-    // 👉 CHALLENGE 3
+    // 👉 CHALLENGE 3 
     function booleanize(obj) {
-
+    for (let key in obj) {
+        if (key.length > 9) {
+            return "shorten all prop names to 9 chars or less";
+        }
+        if (obj[key] === 0) {
+            obj[key] = false;
+        } else if (obj[key] === 1) {
+            obj[key] = true;
+        } else if (obj[key] === null) {
+            delete obj[key];
+        }
     }
+    return obj;
+}
+
+let obj = {
+    keyZero: 0,
+    keyOne: 1,
+    keyNull: null,
+    keyTwo: 2
+};
+
+console.log(booleanize(obj));
+
 
     // 👉 CHALLENGE 4
-    function scrub(text, forbidden) {
-
+      function scrub(text, forbidden) {
+    if (!text || !forbidden.length) {
+        return text;
     }
+
+    let words = text.split(' ');
+
+    for (let i = 0; i < words.length; i++) {
+        if (forbidden.includes(words[i])) {
+            words[i] = 'x'.repeat(words[i].length);
+        }
+    }
+
+    return words.join(' ');
+}
+
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
-    function normalizePhoneNumber(num) {
-
+      function normalizePhoneNumber(num) {
+    if (num.length !== 10) {
+        return "Invalid input. Please enter a 10-digit number.";
     }
+    let formattedNum = "(XXX) XXX-XXXX";
+    let numIndex = num.length - 1;
+
+    for (let i = formattedNum.length - 1; i >= 0; i--) {
+        if (formattedNum[i] === 'X') {
+            formattedNum = formattedNum.substring(0, i) + num[numIndex] + formattedNum.substring(i + 1);
+            numIndex--;
+        }
+    }
+    return formattedNum;
+}
+
 
     // 👉 CHALLENGE 6 (bonus, NOT graded)
-    function diceRolls() {
+      function diceRolls() {
+    let throws = 0;
+    let counter = 0;
+      while (true) {
+        let roll = Math.floor(Math.random() * 6) + 1;
+        throws++;
 
+        if (roll === 6) {
+            counter++;
+            if (counter === 3) {
+                break;
+            }
+        } else {
+            counter = 0;
+        }
     }
+
+    return throws;
+}
+
+
 
     // 🧪 DO NOT make any changes below this line ===================
     globalThis.challengeVersion = 1
@@ -149,11 +200,11 @@ console.log(profileActivation(testProfile3, "New activation"));
   <script id="lodash" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
   <!-- The following script executes the tests you see when you open the Console in Chrome -->
   <script id="tests">
-    runTests('CHALLENGE 1 - profileActivation', profileActivation, [
+    runTests ('CHALLENGE 1 - profileActivation', profileActivation, [
       [[{ active: true }], 'confirm status manually'],
       [[{ active: true }, 'because'], { active: false, reason: 'because' }],
       [[{ active: false, reason: 'because' }], { active: true }],
-    ])
+  ])
     runTests('CHALLENGE 2 - mineSweeper', mineSweeper, [
       [[[["🟥", "🟦", "🟥"], ["🟦", "🟥", "🟥"], ["🟥", "🟦", "🟦"]], 0, 4], "invalid coordinates"],
       [[[["🟥", "🟦", "🟥"], ["🟦", "🟥", "🟥"], ["🟥", "🟦", "🟦"]], 0, 1], "invalid coordinates"],
