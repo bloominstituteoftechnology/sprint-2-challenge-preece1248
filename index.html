@@ -5,7 +5,7 @@
   <title>Web Sprint 2 Challenge</title>
   <script id="challenge">
 
-    
+
     // 👉 CHALLENGE 1 
     function profileActivation(profile, reason) {
     if (profile.active) {
@@ -80,9 +80,9 @@ console.log(booleanize(obj));
 
     let words = text.split(' ');
 
-    for (let i = 0; i < words.length; i++) {
-        if (forbidden.includes(words[i])) {
-            words[i] = 'x'.repeat(words[i].length);
+    for (let indx = 0; indx < words.length; indx++) {
+        if (forbidden.includes(words[indx])) {
+            words[indx] = 'x'.repeat(words[indx].length);
         }
     }
 
@@ -98,9 +98,9 @@ console.log(booleanize(obj));
     let formattedNum = "(XXX) XXX-XXXX";
     let numIndex = num.length - 1;
 
-    for (let i = formattedNum.length - 1; i >= 0; i--) {
-        if (formattedNum[i] === 'X') {
-            formattedNum = formattedNum.substring(0, i) + num[numIndex] + formattedNum.substring(i + 1);
+    for (let indx = formattedNum.length - 1; indx >= 0; indx--) {
+        if (formattedNum[indx] === 'X') {
+            formattedNum = formattedNum.substring(0, indx) + num[numIndex] + formattedNum.substring(indx + 1);
             numIndex--;
         }
     }
